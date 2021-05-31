@@ -1,4 +1,4 @@
-pipelineJob('CI-Pipelines/frontend') {
+pipelineJob('frontend') {
     configure { flowdefinition ->
         flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
             'scm'(class:'hudson.plugin.git.GitSCM',plugin:'git') {
