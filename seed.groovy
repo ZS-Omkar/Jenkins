@@ -6,7 +6,7 @@ folder('CI-Pipelines') {
 pipelineJob('CI-Pipelines/frontend') {
     configure { flowdefinition ->
         flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
-            'scm'(class:'hudson.plugin.git.GitSCM',plugin:'git') {
+            'scm'(class: 'hudson.plugin.git.GitSCM',plugin:'git') {
                 'userRemoteConfigs' {
                     'hudson.plugin.git.UserRemoteConfig' {
                         'url'('https://github.com/ZS-Omkar/frontend.git')
