@@ -11,43 +11,45 @@ def call(Map params = [:]) {
         }
 
         environment {
-            COMPONENT       = "${args.COMPONENT}"
-            NEXUS_IP        = "${args.NEXUS_IP}"
-            PROJECT_NAME    = "${args.PROJECT_NAME}"
-            SLAVE_LABEL     = "${args.SLAVE_LABEL}"
-            APP_TYPE        = "${args.APP_TYPE}"
+            COMPONENT = "${args.COMPONENT}"
+            NEXUS_IP = "${args.NEXUS_IP}"
+            PROJECT_NAME = "${args.PROJECT_NAME}"
+            SLAVE_LABEL = "${args.SLAVE_LABEL}"
+            APP_TYPE = "${args.APP_TYPE}"
 
-        stages {
+            stages {
+                stage('Building code & dependencies ') {
+                    steps {
+                        script {
+                            build = new nexus()
+                            build.code_build("${APP_TYPE}", "${COMPONENT}")
+                        }
+                    }
+                }
 
-            stage('Download Dependencies') {
-                steps {
-                    sh '''
-          npm install
-        '''
-                }
-            }
-            stage('Making build') {
-                steps {
-                    sh'''
-                      npm run build
+                stage('Preparing Artifacts') {
+
+                    steps {
+                        script {
+                            prepare = new nexus()
+                            prepare.make_artifacts("${APP_TYPE}", "${COMPONENT}")
+                        }
+                        sh '''
+                    ls
                     '''
+                    }
                 }
-            }
-            stage('Prepare Artifacts') {
-                steps {
-                    sh '''
-                        zip -r ${COMPONENT}.zip *
-                    '''
-                }
-            }
-            stage('Upload Artifacts') {
-                steps {
-                    sh '''
-                    curl -v -u admin:Omkar@123 --upload-file ${COMPONENT}.zip http://${args.NEXUS_IP}:8081/repository/${COMPONENT}/${COMPONENT}.zip
-                    '''
+
+
+                stage('Uploading Artifacts') {
+                    steps {
+                        script {
+                            upload = new nexus()
+                            upload.nexus("${COMPONENT}")
+                        }
+                    }
                 }
             }
         }
     }
 
-}
