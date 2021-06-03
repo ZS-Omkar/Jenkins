@@ -1,7 +1,7 @@
 def call(Map params = [:]) {
 
     def args = [
-            NEXUS_IP        :'172.31.4.7',
+            NEXUS_IP: '172.31.4.7',
     ]
     args << params
 
@@ -18,38 +18,42 @@ def call(Map params = [:]) {
             APP_TYPE = "${args.APP_TYPE}"
 
             stages {
-                stage('Building code & dependencies ') {
+                stage('Download Dependencies') {
+                    when {
+                        environment name: 'COMPONENT', value: 'frontend'
+                    }
+
                     steps {
-                        script {
-                            build = new nexus()
-                            build.code_build("${APP_TYPE}", "${COMPONENT}")
-                        }
+                        sh '''
+          npm install
+        '''
                     }
                 }
-
-                stage('Preparing Artifacts') {
-
+                stage('Making build') {
                     steps {
-                        script {
-                            prepare = new nexus()
-                            prepare.make_artifacts("${APP_TYPE}", "${COMPONENT}")
-                        }
                         sh '''
-                    ls
+                      npm run build
                     '''
                     }
                 }
-
-
-                stage('Uploading Artifacts') {
+                stage('Prepare Artifacts') {
                     steps {
-                        script {
-                            upload = new nexus()
-                            upload.nexus("${COMPONENT}")
-                        }
+                        sh '''
+                        zip -r ${COMPONENT}.zip *
+                    '''
+                    }
+                }
+                stage('Upload Artifacts') {
+                    steps {
+                        sh '''
+                    curl -v -u admin:Omkar@123 --upload-file ${COMPONENT}.zip http://${args.NEXUS_IP}:8081/repository/${COMPONENT}/${COMPONENT}.zip
+                    '''
                     }
                 }
             }
+
         }
+
     }
 
+}
