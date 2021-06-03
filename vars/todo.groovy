@@ -17,22 +17,22 @@ def call() {
             stage('Making build') {
                 steps {
                     sh'''
-          npm run build
-        '''
+                      npm run build
+                    '''
                 }
             }
             stage('Prepare Artifacts') {
                 steps {
                     sh '''
-         zip -r frontend.zip *
-        '''
+                        zip -r frontend.zip *
+                    '''
                 }
             }
             stage('Upload Artifacts') {
                 steps {
-                    script {
-                        nexus
-                    }
+                    sh '''
+                    curl -v -u admin:Omkar@123 --upload-file /home/ubuntu/workspace/frontend.zip http://172.31.4.7:8081/repository/frontend/frontend.zip
+                    '''
                 }
             }
         }
