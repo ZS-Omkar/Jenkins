@@ -9,6 +9,9 @@ def call(Map params = [:]) {
         agent {
             label "${args.SLAVE_LABEL}"
         }
+        tools {
+            go 'Go 1.11.4'
+        }
 
         environment {
             COMPONENT = "${args.COMPONENT}"
@@ -16,6 +19,8 @@ def call(Map params = [:]) {
             PROJECT_NAME = "${args.PROJECT_NAME}"
             SLAVE_LABEL = "${args.SLAVE_LABEL}"
             APP_TYPE = "${args.APP_TYPE}"
+            GO111MODULE = 'on'
+        }
 
             stages {
                 stage('Build Code & Install Dependencies') {
@@ -45,4 +50,3 @@ def call(Map params = [:]) {
             }
         }
     }
-}
