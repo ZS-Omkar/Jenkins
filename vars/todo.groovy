@@ -10,16 +10,16 @@ def call(Map params = [:]) {
             label "${args.SLAVE_LABEL}"
         }
         tools {
-            go 'go-1.16'
+            go 'Go 1.16.4'
         }
 
         environment {
-            COMPONENT = "${args.COMPONENT}"
-            NEXUS_IP = "${args.NEXUS_IP}"
+            COMPONENT    = "${args.COMPONENT}"
+            NEXUS_IP     = "${args.NEXUS_IP}"
             PROJECT_NAME = "${args.PROJECT_NAME}"
-            SLAVE_LABEL = "${args.SLAVE_LABEL}"
-            APP_TYPE = "${args.APP_TYPE}"
-            GO111MODULE = 'on'
+            SLAVE_LABEL  = "${args.SLAVE_LABEL}"
+            APP_TYPE     = "${args.APP_TYPE}"
+            GO111MODULE  = 'on'
         }
 
             stages {
