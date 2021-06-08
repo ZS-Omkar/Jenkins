@@ -28,7 +28,9 @@ def code_build(APP_TYPE, COMPONENT){
         def execute_com=sh(returnStdout: true, script: command)
         print execute_com
     } else if(APP_TYPE == "GO"){
-        command = "go get" && "go build"
+        command = "export GOPATH=~/go
+                  depmod && apt install go-dep
+                  dep ensure && go get && go build"
         def execute_com=sh(returnStdout: true, script: command)
         print execute_com
     } else if(APP_TYPE == "JAVA"){
