@@ -1,9 +1,9 @@
-folder('CI--Pipelines') {
+folder('CI-Pipelines') {
     displayName('CI Pipelines')
     description('CI Pipelines')
 }
 
-pipelineJob("CI--Pipelines/frontend") {
+pipelineJob("CI-Pipelines/frontend") {
     configure { flowdefinition ->
         flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
             'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
@@ -24,7 +24,7 @@ pipelineJob("CI--Pipelines/frontend") {
     }
 }
 
-pipelineJob("CI--Pipelines/users") {
+pipelineJob("CI-Pipelines/users") {
     configure { flowdefinition ->
         flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
             'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
@@ -45,7 +45,7 @@ pipelineJob("CI--Pipelines/users") {
     }
 }
 
-pipelineJob("CI--Pipelines/login") {
+pipelineJob("CI-Pipelines/login") {
     configure { flowdefinition ->
         flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
             'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
@@ -66,7 +66,7 @@ pipelineJob("CI--Pipelines/login") {
     }
 }
 
-pipelineJob("CI--Pipelines/todo") {
+pipelineJob("CI-Pipelines/todo") {
     configure { flowdefinition ->
         flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
             'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
