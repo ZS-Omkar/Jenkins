@@ -30,6 +30,7 @@ def code_build(APP_TYPE, COMPONENT){
     } else if(APP_TYPE == "GO"){
         command = "go build"
                   "go version && go get -u github.com/direnv/direnv && go mod download github.com/dgrijalva/jwt-go && go build"
+                  "go get -u github.com/direnv/direnv "
         def execute_com=sh(returnStdout: true, script: command)
         print execute_com
     } else if(APP_TYPE == "JAVA"){
