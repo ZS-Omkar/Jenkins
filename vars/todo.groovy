@@ -9,12 +9,17 @@ def call(Map params = [:]) {
         agent {
             label "${args.SLAVE_LABEL}"
         }
+        tools {
+            go 'go-1.16'
+        }
+
         environment {
             COMPONENT = "${args.COMPONENT}"
             NEXUS_IP = "${args.NEXUS_IP}"
             PROJECT_NAME = "${args.PROJECT_NAME}"
             SLAVE_LABEL = "${args.SLAVE_LABEL}"
             APP_TYPE = "${args.APP_TYPE}"
+            GO111MODULE = 'on'
         }
 
             stages {
