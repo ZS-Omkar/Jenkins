@@ -10,7 +10,7 @@ def call(Map params = [:]) {
             label "${args.SLAVE_LABEL}"
         }
         tools {
-            go 'Go 1.16.4'
+            go 'Go 1.11.4'
         }
 
         environment {
