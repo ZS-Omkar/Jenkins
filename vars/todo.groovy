@@ -9,6 +9,9 @@ def call(Map params = [:]) {
         agent {
             label "${args.SLAVE_LABEL}"
         }
+        triggers {
+            pollSCM('* * * * 1-5')
+        }
         tools {
             go 'Go 1.11.4'
         }
