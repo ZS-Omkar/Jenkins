@@ -5,6 +5,14 @@ folder('CI-Pipelines') {
 
 pipelineJob("CI-Pipelines/frontend") {
     configure { flowdefinition ->
+        flowdefinition / 'properties' << 'org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty' {
+            'triggers' {
+                'hudson.triggers.SCMTrigger' {
+                    'spec'('* * * * 1-5')
+                    'ignorePostCommitHooks'(false)
+                }
+            }
+        }
         flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
             'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
                 'userRemoteConfigs' {
@@ -14,7 +22,7 @@ pipelineJob("CI-Pipelines/frontend") {
                 }
                 'branches' {
                     'hudson.plugins.git.BranchSpec' {
-                        'name'('*/main')
+                        'name'('*/tags/*')
                     }
                 }
             }
@@ -26,6 +34,14 @@ pipelineJob("CI-Pipelines/frontend") {
 
 pipelineJob("CI-Pipelines/users") {
     configure { flowdefinition ->
+        flowdefinition / 'properties' << 'org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty' {
+            'triggers' {
+                'hudson.triggers.SCMTrigger' {
+                    'spec'('* * * * 1-5')
+                    'ignorePostCommitHooks'(false)
+                }
+            }
+        }
         flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
             'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
                 'userRemoteConfigs' {
@@ -35,7 +51,7 @@ pipelineJob("CI-Pipelines/users") {
                 }
                 'branches' {
                     'hudson.plugins.git.BranchSpec' {
-                        'name'('*/main')
+                        'name'('*/tags/*')
                     }
                 }
             }
@@ -47,6 +63,14 @@ pipelineJob("CI-Pipelines/users") {
 
 pipelineJob("CI-Pipelines/login") {
     configure { flowdefinition ->
+        flowdefinition / 'properties' << 'org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty' {
+            'triggers' {
+                'hudson.triggers.SCMTrigger' {
+                    'spec'('* * * * 1-5')
+                    'ignorePostCommitHooks'(false)
+                }
+            }
+        }
         flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
             'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
                 'userRemoteConfigs' {
@@ -56,7 +80,7 @@ pipelineJob("CI-Pipelines/login") {
                 }
                 'branches' {
                     'hudson.plugins.git.BranchSpec' {
-                        'name'('*/main')
+                        'name'('*/tags/*')
                     }
                 }
             }
@@ -68,6 +92,14 @@ pipelineJob("CI-Pipelines/login") {
 
 pipelineJob("CI-Pipelines/todo") {
     configure { flowdefinition ->
+        flowdefinition / 'properties' << 'org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty' {
+            'triggers' {
+                'hudson.triggers.SCMTrigger' {
+                    'spec'('* * * * 1-5')
+                    'ignorePostCommitHooks'(false)
+                }
+            }
+        }
         flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
             'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
                 'userRemoteConfigs' {
@@ -77,7 +109,7 @@ pipelineJob("CI-Pipelines/todo") {
                 }
                 'branches' {
                     'hudson.plugins.git.BranchSpec' {
-                        'name'('*/main')
+                        'name'('*/tags/*')
                     }
                 }
             }
