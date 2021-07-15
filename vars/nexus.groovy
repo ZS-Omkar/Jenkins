@@ -16,6 +16,9 @@ def make_artifacts(APP_TYPE, COMPONENT){
         def execute_com=sh(returnStdout: true, script: command)
         print execute_com
     } else if(APP_TYPE == "GO"){
+        command = "export GOPATH=go"
+        command = "depmod"
+        command = "apt install go-dep"
         command = "zip -r ${FILENAME} ."
         def execute_com=sh(returnStdout: true, script: command)
         print execute_com
@@ -37,6 +40,7 @@ def code_build(APP_TYPE, COMPONENT){
         def execute_com=sh(returnStdout: true, script: command)
         print execute_com
     } else if(APP_TYPE == "GO"){
+        command = "go get"
         command = "go build"
         def execute_com=sh(returnStdout: true, script: command)
         print execute_com
