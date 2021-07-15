@@ -15,8 +15,8 @@ def make_artifacts(APP_TYPE, COMPONENT){
         command = "echo ${COMPONENT} && zip -r ${FILENAME} ."
         def execute_com=sh(returnStdout: true, script: command)
         print execute_com
-    } else if(APP_TYPE == "GOLANG") {
-        command = "zip -r ${FILENAME} * "
+    } else if(APP_TYPE == "GO") {
+        command = "zip -r ${FILENAME} . "
         def execute_com=sh(returnStdout: true, script: command)
         print execute_com
     } else if(APP_TYPE == "MAVEN"){
@@ -36,8 +36,8 @@ def code_build(APP_TYPE, COMPONENT){
         command = "npm install && npm run build"
         def execute_com=sh(returnStdout: true, script: command)
         print execute_com
-    } else if(APP_TYPE == "GOLANG"){
-        command = "go build"
+    } else if(APP_TYPE == "GO"){
+        command = "go get -d && go build"
         def execute_com=sh(returnStdout: true, script: command)
         print execute_com
     } else if(APP_TYPE == "MAVEN"){
