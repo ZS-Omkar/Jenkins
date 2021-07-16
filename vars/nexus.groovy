@@ -4,7 +4,7 @@ def nexus(COMPONENT) {
     def FILENAME=COMPONENT+'-'+get_branch_exec+'.zip'
 
 
-   command = "curl -f -v -u admin:Omkar@123 --upload-file ../${FILENAME} http://${NEXUS_IP}:8081/repository/${COMPONENT}/${FILENAME}"
+   command = "curl -f -v -u admin:Omkar@123 --upload-file ../${FILENAME} http://172.31.4.7:8081/repository/${COMPONENT}/${FILENAME}"
    def execute_state=sh(returnStdout: true, script: command)
 }
 
