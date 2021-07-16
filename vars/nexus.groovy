@@ -3,8 +3,10 @@ def nexus(COMPONENT) {
     def get_branch_exec=sh(returnStdout: true, script: get_branch)
     def FILENAME=COMPONENT+'-'+get_branch_exec+'.zip'
 
-    command = "curl -f -v -u admin:Omkar@123 --upload-file ${FILENAME} http://${NEXUS_IP}:8081/repository/${COMPONENT}/${FILENAME}"
-    def execute_state=sh(returnStdout: true, script: command)
+    ls
+
+//    command = "curl -f -v -u admin:Omkar@123 --upload-file ${FILENAME} http://${NEXUS_IP}:8081/repository/${COMPONENT}/${FILENAME}"
+//    def execute_state=sh(returnStdout: true, script: command)
 }
 
 def make_artifacts(APP_TYPE, COMPONENT){
