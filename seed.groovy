@@ -118,3 +118,25 @@ pipelineJob("CI-Pipelines/todo") {
         }
     }
 }
+
+
+pipelineJob("Deployment-Pipeline") {
+    configure { flowdefinition ->
+        flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
+            'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
+                'userRemoteConfigs' {
+                    'hudson.plugins.git.UserRemoteConfig' {
+                        'url'('https://github.com/ZS-Omkar/Jenkins.git')
+                    }
+                }
+                'branches' {
+                    'hudson.plugins.git.BranchSpec' {
+                        'name'('main')
+                    }
+                }
+            }
+            'scriptPath'('Jenkinsfile-Deployment')
+            'lightweight'(true)
+        }
+    }
+}
