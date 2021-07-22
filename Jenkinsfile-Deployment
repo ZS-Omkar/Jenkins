@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Deploy to prod') {
             when {
-                environment name: 'ENV', value: 'dev'
+                environment name: 'ENV', value: 'prod'
             }
             steps {
                 sh 'echo ansible'
