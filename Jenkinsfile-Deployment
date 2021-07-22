@@ -6,7 +6,7 @@ pipeline {
     parameters {
         choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Select Environment')
         string(name: 'COMPONENT', defaultValue: '', description: 'Which component to deploy')
-        string(name: 'COMPONENT', defaultValue: '', description: 'Which version of component to deploy')
+        string(name: 'VERSION', defaultValue: '', description: 'Which version of component to deploy')
     }
 
 
