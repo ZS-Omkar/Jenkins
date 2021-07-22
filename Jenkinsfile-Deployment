@@ -3,6 +3,10 @@ pipeline {
         label "ANSIBLE"
     }
 
+    environment {
+        UBUNTU_SSH_PASSWORD=credentials('UBUNTU_SSH_PASSWORD')
+    }
+
     parameters {
         choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Select Environment')
         string(name: 'COMPONENT', defaultValue: '', description: 'Which component to deploy')
@@ -23,7 +27,10 @@ pipeline {
                 environment name: 'ENV', value: 'dev'
             }
             steps {
-                sh 'echo ansible'
+                git branch: 'main', url: 'https://github.com/ZS-Omkar/Ansible-Todo.git'
+                sh '''
+                ansible-playbook -i inv todo.yml -t ${COMPONENT} -e COMPONENT=${COMPONENT} -e ENV=${ENV} -e APP_VERSION=${VERSION} -e anisble_password=${UBUNTU_SSH_PASSWORD}
+                '''
             }
         }
         stage('Deploy to prod') {
