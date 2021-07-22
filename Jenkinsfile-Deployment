@@ -1,0 +1,26 @@
+pipeline {
+    agent {
+        label "ANSIBLE"
+    }
+
+    parameters {
+        choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Environment')
+    }
+    stages {
+        stage('Build') {
+            steps {
+                //
+            }
+        }
+        stage('Test') {
+            steps {
+                //
+            }
+        }
+        stage('Deploy') {
+            steps {
+                //
+            }
+        }
+    }
+}
