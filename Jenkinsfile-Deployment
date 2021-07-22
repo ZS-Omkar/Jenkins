@@ -4,9 +4,8 @@ pipeline {
     }
 
     parameters {
-        choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Environment')
-        string(name: 'COMPONENT', defaultValue: '', description: 'which component to deploy')
-        string(name: 'VERSION', defaultValue: '', description: 'which version of component to deploy')
+        choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Select Environment')
+
     }
     stages {
         stage('find the server') {
