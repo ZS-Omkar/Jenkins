@@ -5,9 +5,11 @@ pipeline {
 
     parameters {
         choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Environment')
+        string(name: 'COMPONENT', defaultValue: '', description: 'which component to deploy')
+        string(name: 'VERSION', defaultValue: '', description: 'which version of component to deploy')
     }
     stages {
-        stage('find the servier') {
+        stage('find the server') {
             steps {
                 sh 'echo'
             }
