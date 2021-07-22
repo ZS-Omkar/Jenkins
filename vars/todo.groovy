@@ -50,6 +50,11 @@ def call(Map params = [:]) {
                         }
                     }
                 }
+                stage('Upload Artifacts') {
+                    steps {
+                        build job: 'Deployment-Pipeline', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'COMPONENT', value: 'frontend'), string(name: 'VERSION', value: '0.0.0')]
+                    }
+                }
             }
         }
     }
