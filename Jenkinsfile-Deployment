@@ -7,19 +7,19 @@ pipeline {
         choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Environment')
     }
     stages {
-        stage('Build') {
+        stage('find the servier') {
             steps {
-                //
+                sh 'echo'
             }
         }
-        stage('Test') {
+        stage('Deploy to Dev') {
             steps {
-                //
+                sh 'echo ansible'
             }
         }
-        stage('Deploy') {
+        stage('Deploy to prod') {
             steps {
-                //
+                sh 'echo ansible'
             }
         }
     }
