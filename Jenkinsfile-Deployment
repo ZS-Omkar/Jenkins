@@ -28,9 +28,9 @@ pipeline {
             }
             steps {
                 git branch: 'main', url: 'https://github.com/ZS-Omkar/Ansible-Todo.git'
-                sh '''
-                ansible-playbook -i inv todo.yml -t ${COMPONENT} -e COMPONENT=${COMPONENT} -e ENV=${ENV} -e APP_VERSION=${VERSION} -e anisble_password=${UBUNTU_SSH_PASSWORD}
-                '''
+                 sh '''
+                   ansible-playbook -i inventory todo.yml -t ${COMPONENT} -e COMPONENT=${COMPONENT} -e ENV=${ENV} -e APP_VERSION=${VERSION} -u ubuntu -e ansible_password=${UBUNTU_SSH_PASSWORD}
+                   '''
             }
         }
         stage('Deploy to prod') {
